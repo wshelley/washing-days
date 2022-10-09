@@ -47,6 +47,8 @@ def main(args):
     print("Full breakdown of conditions")
     #print(df.query('ideal_conditions == True'))
     print(df)
+    print()
+    print("Weather data by Open-Meteo.com")
     
 
 if __name__ == "__main__":
