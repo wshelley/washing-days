@@ -1,9 +1,23 @@
-# Intial Project Setup:
+# Washing Days
+
+Predicting the ideal times to dry clothes outside using meteorological data
+
+# Usage:
+```
+pip3 install -r requirements.txt
+python3 washing-days.py --lon -3.35 --lat 55.75
+```
+
+### Intial Project Setup:
+```
 mkdir washing-days
 cd washing-days
 python3 -m venv venv
 git init
-....start developing...
-Select Command Palete > Python > Select Interpreter ./venv/bin/python3.9
+```
+
+```
 source venv/bin/activate
+Select Command Palete > Python > Select Interpreter ./venv/bin/python3.9
 pip3 install -r requirements.txt
+```
