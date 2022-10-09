@@ -1,6 +1,8 @@
 # Washing Days
 
-Predicting the ideal times to dry clothes outside using meteorological data
+Predicting the ideal times to dry clothes outside using meteorological data.
+
+Currently using **temperature, relative humidity, precipitation, wind speed and direct solar radiation** to calculate the best time frames. Further refinment will be based on real-world testing. See washing-days.py for more information.
 
 ## Live Demo
 
