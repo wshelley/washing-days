@@ -2,6 +2,12 @@
 
 Predicting the ideal times to dry clothes outside using meteorological data
 
+# Live Demo
+
+https://wshelley.github.io/washing-days.txt
+
+Updating every hour.
+
 # Example Usage:
 ```
 pip3 install -r requirements.txt
