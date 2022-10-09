@@ -19,11 +19,16 @@ def main(args):
     """ Main entry point of the app """
     logger.info(args)
     response = requests.get("https://api.open-meteo.com/v1/forecast?latitude=" + str(args.lat) + "&longitude=" + str(args.lon) + "&hourly=temperature_2m,relativehumidity_2m,precipitation,windspeed_10m,direct_radiation&windspeed_unit=mph")
-    #jprint(response.json())
     data = response.json()['hourly']
     df = pd.DataFrame(data)
     df['ideal_conditions'] = np.where((df['temperature_2m'] > 0) & (df['relativehumidity_2m'] < 90) & (df['precipitation'] == 0) & (df['windspeed_10m'] > 3) & (df['direct_radiation'] > 10), True, False)
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+    print("Ideal Times for Drying Outside")
     print(df.query('ideal_conditions == True'))
+    print()
+    print("Summary of Ideal Times for Drying Outside")
 
     df = df.reset_index()  # make sure indexes pair with number of rows
     first_time = None # reset search for ideal conditions
@@ -38,13 +43,6 @@ def main(args):
             finish_time = datetime.datetime.fromisoformat(row['time'])
             print(str(first_time) + " for " + str(time_difference.seconds//3600) + " hours. Finishes at " + str(finish_time))
           first_time = None # reset search for ideal conditions
-
-    #great_df = df.query('temperature_2m > 0 and relativehumidity_2m < 90 and precipitation == 0 and windspeed_10m > 3 and direct_radiation > 10')
-
-def jprint(obj):
-    # create a formatted string of the Python JSON object
-    text = json.dumps(obj, sort_keys=True, indent=4)
-    print(text)
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
