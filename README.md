@@ -4,7 +4,7 @@ Predicting the ideal times to dry clothes outside using meteorological data.
 
 Currently using **temperature, relative humidity, precipitation, wind speed and direct solar radiation** to calculate the best time frames. Further refinment will be based on real-world testing. See washing-days.py for more information.
 
-Weather data very kindly provided by: <a href="https://open-meteo.com/">CleanOpen-Meteo.com</a>
+Weather data very kindly provided by: <a href="https://open-meteo.com/">Open-Meteo.com</a>
 
 ## Live Demo
 
