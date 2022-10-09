@@ -25,9 +25,6 @@ def main(args):
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', None)
-    print("Ideal Times for Drying Outside")
-    print(df.query('ideal_conditions == True'))
-    print()
     print("Summary of Ideal Times for Drying Outside")
 
     df = df.reset_index()  # make sure indexes pair with number of rows
@@ -41,8 +38,13 @@ def main(args):
           time_difference = datetime.datetime.fromisoformat(row['time']) - first_time
           if (time_difference > datetime.timedelta(hours=4)):
             finish_time = datetime.datetime.fromisoformat(row['time'])
-            print(str(first_time) + " for " + str(time_difference.seconds//3600) + " hours. Finishes at " + str(finish_time))
+            print(first_time.strftime("%a %H:00") + "-" + finish_time.strftime("%-H:00") + " (" + str(time_difference.seconds//3600) + " hours)")
           first_time = None # reset search for ideal conditions
+
+    print()
+    print("Ideal Times for Drying Outside")
+    print(df.query('ideal_conditions == True'))
+    
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
