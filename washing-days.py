@@ -9,19 +9,42 @@ __license__ = "MIT"
 
 import argparse
 import requests
-#import json
+import json
+import pandas as pd
+import numpy as np
+import datetime
 from logzero import logger
-
 
 def main(args):
     """ Main entry point of the app """
     logger.info(args)
-    print("hello world!!")
-    print(args.lon)
-    print(args.lat)
     response = requests.get("https://api.open-meteo.com/v1/forecast?latitude=" + str(args.lat) + "&longitude=" + str(args.lon) + "&hourly=temperature_2m,relativehumidity_2m,precipitation,windspeed_10m,direct_radiation&windspeed_unit=mph")
-    print(response.status_code)
-    print(response.json())
+    #jprint(response.json())
+    data = response.json()['hourly']
+    df = pd.DataFrame(data)
+    df['ideal_conditions'] = np.where((df['temperature_2m'] > 0) & (df['relativehumidity_2m'] < 90) & (df['precipitation'] == 0) & (df['windspeed_10m'] > 3) & (df['direct_radiation'] > 10), True, False)
+    print(df.query('ideal_conditions == True'))
+
+    df = df.reset_index()  # make sure indexes pair with number of rows
+    first_time = None # reset search for ideal conditions
+    for index, row in df.iterrows():
+      if (row['ideal_conditions'] == True):
+        if first_time == None:
+          first_time = datetime.datetime.fromisoformat(row['time'])
+      if (row['ideal_conditions'] == False):
+        if first_time != None:
+          time_difference = datetime.datetime.fromisoformat(row['time']) - first_time
+          if (time_difference > datetime.timedelta(hours=4)):
+            finish_time = datetime.datetime.fromisoformat(row['time'])
+            print(str(first_time) + " for " + str(time_difference.seconds//3600) + " hours. Finishes at " + str(finish_time))
+          first_time = None # reset search for ideal conditions
+
+    #great_df = df.query('temperature_2m > 0 and relativehumidity_2m < 90 and precipitation == 0 and windspeed_10m > 3 and direct_radiation > 10')
+
+def jprint(obj):
+    # create a formatted string of the Python JSON object
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """

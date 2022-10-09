@@ -11,7 +11,7 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args" : ["--lon", "55.75", "--lat", "3.35"]
+      "args" : ["--lon", "-3.35", "--lat", "55.75"]
     }
   ]
 }
