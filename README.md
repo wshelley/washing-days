@@ -2,11 +2,14 @@
 
 Predicting the ideal times to dry clothes outside using meteorological data
 
-# Usage:
+# Example Usage:
 ```
 pip3 install -r requirements.txt
 python3 washing-days.py --lon -3.35 --lat 55.75
 ```
+# Example Output:
+
+![Output](docs/output.png)
 
 ### Intial Project Setup:
 ```
