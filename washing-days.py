@@ -42,8 +42,11 @@ def main(args):
           first_time = None # reset search for ideal conditions
 
     print()
-    print("Ideal Times for Drying Outside")
-    print(df.query('ideal_conditions == True'))
+    print("Last Calculated at: " + str(datetime.datetime.now()) + " for Location: " + str(args.lat)  +  ", " + str(args.lon))
+    print()
+    print("Full breakdown of conditions")
+    #print(df.query('ideal_conditions == True'))
+    print(df)
     
 
 if __name__ == "__main__":
