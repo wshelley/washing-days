@@ -9,7 +9,7 @@ python3 washing-days.py --lon -3.35 --lat 55.75
 ```
 # Example Output:
 
-![Output](docs/output.png)
+![Output](docs/example-output.png)
 
 ### Intial Project Setup:
 ```
