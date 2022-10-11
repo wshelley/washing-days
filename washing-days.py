@@ -55,9 +55,8 @@ if __name__ == "__main__":
     """ This is executed when run from the command line """
     parser = argparse.ArgumentParser()
 
-    # Location argument
-    parser.add_argument("--lon", required=True, type=float, action="store", dest="lon", help="Longitude Location String (e.g '55.75' is for West Linton)")
-    parser.add_argument("--lat", required=True, type=float, action="store", dest="lat", help="Latitude Location String (e.g '3.35' is for West Linton)")
+    parser.add_argument("--lon", required=True, type=float, action="store", dest="lon", help="Longitude Location String (e.g '-3.35' is for West Linton)")
+    parser.add_argument("--lat", required=True, type=float, action="store", dest="lat", help="Latitude Location String (e.g '55.75' is for West Linton)")
 
 
     # Specify output of "--version"
